@@ -10,6 +10,8 @@ import requests
 from bs4 import BeautifulSoup
 import smtplib
 from email.message import EmailMessage
+from urllib.parse import urljoin
+
 
 
 # Load environment variables from .env file
@@ -30,7 +32,9 @@ def fetch_news():
         link_tag = item.find('a') # find the <a> tag within each <span>
         if link_tag: 
             title = link_tag.text
-            link = link_tag['href']
+            href = link_tag['href']
+            # Check if the URL is relative and make it absolute if needed 
+            link = urljoin(url, href)
             news_content.append(f"{title}\n{link}\n\n")
     return news_content
 
