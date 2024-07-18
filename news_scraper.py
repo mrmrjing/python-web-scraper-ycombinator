@@ -1,8 +1,4 @@
-# Libraries needed: 
-#   - requests for making HTTP requests
-#   - BeautifulSoup for parsing HTML
-#   - smtplib for sending emails
-#   - TaskScheduler for scheduling tasks (Cron jobs)
+#!/usr/bin/env python3
 
 import os
 from dotenv import load_dotenv
