@@ -6,7 +6,7 @@ This project contains a Python script for scraping news articles from Hacker New
 
 - Fetches latest titles and URLs from Hacker News.
 - Emails the fetched news items to a specified email address.
-- Runs scheduled tasks to automate the process daily (TODO)
+- Runs scheduled tasks to automate the process daily.
 
 ## Prerequisites
 
@@ -36,9 +36,35 @@ SMTP_PORT=465
 Replace the placeholder values with your actual email settings.
 
 ## Usage 
+### Running the script manually 
 Run the script manually with: 
 ```bash
 python news_scraper.py
 ``` 
 
-To set up daily execution at a specific time, configure a cron job (Linux/macOS) or a scheduled task (Windows).
+### Automating the script using a Cron Job  
+The cron command-line utility is a job scheduler on Unix-like operating systems. Users who set up and maintain software environments use cron to schedule jobs, also known as cron jobs, to run periodically at fixed times, dates, or intervals. (https://en.wikipedia.org/wiki/Cron)
+
+1. Open the terminal 
+2. Type crontab -e to edit the cron jobs 
+3. Add the following line to schedule the script: 
+```bash
+0 10 * * * /path/to/python3 /path/to/news_scraper.py
+```
+Replace /path/to/python3 with the path to the Python executable and /path/to/news_scraper.py with the path to the news_scraper.py script.
+4. Save and exit the editor. The cron job is now set up and will run at 10am everyday. 
+
+5. Confirm that the cron jobs have been added by listing them: 
+```bash
+crontab -l
+```
+ 
+This is the format of a Cron job entry: 
+* * * * * command
+- - - - -
+| | | | |
+| | | | +----- Day of the week (0 - 7) (Sunday=0 or 7)
+| | | +------- Month (1 - 12)
+| | +--------- Day of the month (1 - 31)
+| +----------- Hour (0 - 23)
++------------- Minute (0 - 59)
